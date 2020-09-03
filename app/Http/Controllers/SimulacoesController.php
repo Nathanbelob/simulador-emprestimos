@@ -41,13 +41,13 @@ class SimulacoesController extends Controller
             if ($validator->fails()) {
                 return response()->json($validator->messages(), 400);
             }
-            
+
             $emprestimo = [];
             $json_file = file_get_contents(\Storage::disk('s3')->url('taxas_instituicoes.json'));
-            $taxas = collect(json_decode($json_file, true))->when($request->instituicao, function($q) use($request){
-                return $q->whereIn('instituicao', $request->instituicao);
-            })->when($request->convenio, function($q) use($request){
-                return $q->whereIn('convenio', $request->convenio);
+            $taxas = collect(json_decode($json_file, true))->when($request->instituicoes, function($q) use($request){
+                return $q->whereIn('instituicao', $request->instituicoes);
+            })->when($request->convenios, function($q) use($request){
+                return $q->whereIn('convenio', $request->convenios);
             })->when($request->parcela, function($q) use($request){
                 return $q->where('parcelas', $request->parcela);
             })->groupBy('instituicao');
@@ -122,8 +122,8 @@ class SimulacoesController extends Controller
     {
         return [
             'valor_emprestimo' => 'required|numeric',
-            'instituicao' => 'array',
-            'convenio' => 'array',
+            'instituicoes' => 'array',
+            'convenios' => 'array',
             'parcela' => 'numeric'
         ];
     }
