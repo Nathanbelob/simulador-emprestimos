@@ -14,6 +14,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group([
+    'prefix' => 'v1'
+], function(){
+    Route::resource(
+        'convenios',
+        'ConveniosController',
+        [
+            'only' => ['index'],
+        ]
+    );
+
+    Route::resource(
+        'instituicoes',
+        'InstituicoesController',
+        [
+            'only' => ['index'],
+        ]
+    );
+
+    Route::resource(
+        'simulacoes',
+        'SimulacoesController',
+        [
+            'only' => ['store'],
+        ]
+    );
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
