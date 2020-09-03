@@ -1,10 +1,11 @@
 # simulador-emprestimos
 
 ## Como rodar o projeto
-$ composer install
+
+- Copiar o arquivo .env.example para o arquivo .env
 
 ```
-Copiar o arquivo .env.example para o arquivo .env
+$ composer install
 
 ```
 $ php artisan config:cache
