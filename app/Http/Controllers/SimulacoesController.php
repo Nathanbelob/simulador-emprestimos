@@ -36,12 +36,12 @@ class SimulacoesController extends Controller
     public function store(Request $request)
     {
         try {
-            // dd($request->instituicao);
             $validator = Validator::make($request->all(), $this->_rules());
 
             if ($validator->fails()) {
                 return response()->json($validator->messages(), 400);
             }
+            
             $emprestimo = [];
             $json_file = file_get_contents(\Storage::disk('s3')->url('taxas_instituicoes.json'));
             $taxas = collect(json_decode($json_file, true))->when($request->instituicao, function($q) use($request){
