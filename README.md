@@ -1,17 +1,17 @@
-# simulador-emprestimos
+# Simulador de Empréstimos
 
-## Como rodar o projeto
-
+## Instalação
+```
+git clone https://github.com/Nathanbelob/simulador-emprestimos.git
+```
 - Copiar o arquivo .env.example para o arquivo .env
-- Rodar os comandos:
 
 ```
 composer install
 
+php artisan key:generate
 
-```
 php artisan config:cache
 
-
-```
 php artisan serve
+```
